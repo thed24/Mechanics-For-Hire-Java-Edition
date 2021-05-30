@@ -53,7 +53,7 @@ public class AdvertisementFacade implements AdvertisementFacadeRemote, Advertise
 
     @Override
     public AdvertisementDTO getRecord(String advertisementId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.myDAO2DTO(this.find(advertisementId));
     }
     
     @Override

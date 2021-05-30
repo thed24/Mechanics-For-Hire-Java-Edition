@@ -108,11 +108,12 @@ public class AdvertisementManagedBean {
     }
     
     public String edit(){
+        getAdvertisement();
         String result = "failure";
         if (isValidUserid(userid) && isValidName(name)
                 && isValidTimeSlot(timeSlot) && isValidAdvertisementId(advertisementid)) {
             AdvertisementDTO advertisementDTO = new AdvertisementDTO(advertisementid, name,
-                        timeSlot, true, userid);
+                        timeSlot, isBooked, userid);
             this.advertisementFacade.updateRecord(advertisementDTO);
             result = "success";
         }
@@ -146,18 +147,11 @@ public class AdvertisementManagedBean {
         return result;
     }
 
-    public String getAdvertisement() {
-        String result = "failure";
+    public void getAdvertisement() {
         AdvertisementDTO foundAdvertisement = advertisementFacade.getRecord(advertisementid);
-        if (isValidAdvertisementId(userid)) {
-            this.userid = foundAdvertisement.getUserid();
-            this.name = foundAdvertisement.getName();
-            this.timeSlot = foundAdvertisement.getTimeSlot();
-            this.advertisementid = foundAdvertisement.getAdvertisementid();
-            this.isBooked = foundAdvertisement.getIsBooked();
-            result = "success";
-        }
-        return result;
+        this.userid = foundAdvertisement.getUserid();
+        this.advertisementid = foundAdvertisement.getAdvertisementid();
+        this.isBooked = foundAdvertisement.getIsBooked();
     }
     
     public ArrayList<AdvertisementDTO> getAllAdvertisements(){

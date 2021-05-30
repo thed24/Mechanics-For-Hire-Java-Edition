@@ -42,7 +42,7 @@
             <h:column>
                <f:facet name = "header">Book Here</f:facet>
                <h:commandButton rendered="#{advertisement.isBooked eq false}" value="Book" action="#{AdvertisementManagedBean.book}">
-                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}"/>
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.userid}" value="#{advertisement.userid}" />
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.timeSlot}" value="#{advertisement.timeSlot}" />
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.advertisementid}" value="#{advertisement.advertisementid}" />
@@ -53,13 +53,13 @@
                 
             <h:column>
                <f:facet name = "header">Edit</f:facet>
-               <h:link rendered="#{user.userid eq advertisement.userid}" outcome="editAdvertisement.xhtml" value="Edit" />
+               <h:link rendered="#{user.userid eq advertisement.userid}" outcome="editAdvertisement.xhtml?id=#{advertisement.advertisementid}" value="Edit" />
             </h:column>
                 
             <h:column>
                <f:facet name = "header">Delete</f:facet>
                <h:commandButton rendered="#{user.userid eq advertisement.userid}" value="Delete" action="#{AdvertisementManagedBean.delete}">
-                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}"/>
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.userid}" value="#{advertisement.userid}" />
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.timeSlot}" value="#{advertisement.timeSlot}" />
                     <f:setPropertyActionListener target="#{AdvertisementManagedBean.advertisementid}" value="#{advertisement.advertisementid}" />
