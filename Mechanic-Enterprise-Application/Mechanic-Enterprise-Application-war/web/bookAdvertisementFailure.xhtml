@@ -8,16 +8,11 @@
     <h:body>
         <h:form>
             <h1>
-                User Registration - Failure
+                Booking Advertisement - Failure
             </h1>
             <h2>
-                User whose user id is <h:outputText value="#{UserManagedBean.userid}"/>
-                cannot be added to the system.
+                #{user.name} has failed to booked the #{AdvertisementManagedBean.timeSlot} for #{AdvertisementManagedBean.name}.
             </h2>
-            <p></p>
-            <h3>
-                Possibly there is an existing user with the same userid.
-            </h3>
             <p></p>
             Back to <h:commandButton value="Main Menu" action="mainmenu.xhtml"/>
         </h:form>
