@@ -1,0 +1,73 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Main Menu</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h1>
+                <h:outputText value="Welcome to Mechanic For Hire!"/>
+            </h1>
+            <h:form rendered="#{not empty user}">
+                <p>Welcome, #{user.name}</p>
+                <a href="createAdvertisement.xhtml">Create Advertisement</a><br></br><br></br>
+                <h:commandButton value="Logout" action="#{UserManagedBean.logOut}" /><br></br><br></br>
+            </h:form>
+            <h:form rendered="#{empty user}">
+                <h:outputText value="Please register or login to view advertisements"/>
+                <h3>
+                    <ol>
+                        <li><a href="registerUser.xhtml">Register</a></li>
+                        <li><a href="loginUser.xhtml">Login</a></li>
+                    </ol>
+                </h3>
+            </h:form>
+        </h:form>
+        <h:form rendered="#{not empty user and not empty AdvertisementManagedBean.allAdvertisements}">
+            <h:dataTable var="advertisement" value = "#{AdvertisementManagedBean.allAdvertisements}" border="2"
+            cellspacing="1" cellpadding="1">
+            <h:column>    				
+               <f:facet name = "header">Name</f:facet>    				
+               #{advertisement.name}
+            </h:column>
+            
+            <h:column>
+               <f:facet name = "header">Time Slot</f:facet>
+               #{advertisement.timeSlot}
+            </h:column>
+            
+            <h:column>
+               <f:facet name = "header">Book Here</f:facet>
+               <h:commandButton rendered="#{advertisement.isBooked eq false}" value="Book" action="#{AdvertisementManagedBean.book}">
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.userid}" value="#{advertisement.userid}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.timeSlot}" value="#{advertisement.timeSlot}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.advertisementid}" value="#{advertisement.advertisementid}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.isBooked}" value="#{advertisement.isBooked}" />
+               </h:commandButton>
+               <h:outputText rendered="#{advertisement.isBooked eq true}" value="Already booked" />
+            </h:column>
+                
+            <h:column>
+               <f:facet name = "header">Edit</f:facet>
+               <h:link rendered="#{user.userid eq advertisement.userid}" outcome="editAdvertisement.xhtml" value="Edit" />
+            </h:column>
+                
+            <h:column>
+               <f:facet name = "header">Delete</f:facet>
+               <h:commandButton rendered="#{user.userid eq advertisement.userid}" value="Delete" action="#{AdvertisementManagedBean.delete}">
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.name}" value="#{advertisement.name}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.userid}" value="#{advertisement.userid}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.timeSlot}" value="#{advertisement.timeSlot}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.advertisementid}" value="#{advertisement.advertisementid}" />
+                    <f:setPropertyActionListener target="#{AdvertisementManagedBean.isBooked}" value="#{advertisement.isBooked}" />
+               </h:commandButton>
+            </h:column>
+         </h:dataTable>
+        </h:form>
+    </h:body>
+</html>
+

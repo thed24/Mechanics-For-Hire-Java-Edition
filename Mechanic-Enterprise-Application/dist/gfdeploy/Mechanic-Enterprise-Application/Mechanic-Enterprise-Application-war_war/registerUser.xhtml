@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Register User</title>
+    </h:head>
+    <h:body>
+        <h1>
+            Register a User
+        </h1>
+        <h2>
+            <p>Please enter your details below:</p>
+        </h2>
+        <h3>
+            <h:form id="form">
+                <h:panelGrid columns="2" id="grid">
+                    <h:outputText value="User Id: "/>
+                    <h:inputText id="userid" value="#{UserManagedBean.userid}"
+                                 required="true"
+                                 requiredMessage="The userid field cannot be empty!"
+                                 size="6" >
+                        <f:validateLength minimum = "6" maximum = "6"/>
+                    </h:inputText>
+                    <h:outputText value="Name: "/>
+                    <h:inputText id="name" value="#{UserManagedBean.name}"
+                                 required="true"
+                                 requiredMessage="The name field cannot be empty!"
+                                 size="30"/>
+                    <h:outputText value="Password "/>
+                    <h:inputText id="password" value="#{UserManagedBean.password}"
+                                 required="true"
+                                 binding="#{password}"
+                                 requiredMessage="The password field cannot be empty!"
+                                 size="6"/>
+                    <h:outputText value="Confirm Password "/>
+                    <h:inputText id="password2" value="#{UserManagedBean.password2}"
+                                 required="true"
+                                 requiredMessage="The confirm password field cannot be empty!"
+                                 size="6">
+                        <f:attribute name="password" value="#{password}"/>
+                        <f:validateLength minimum = "6" maximum = "6"/>
+                        <f:validator validatorId="confirmPasswordValidator" />
+                    </h:inputText>
+                    <h:outputText value="Email: "/>
+                    <h:inputText id="email" value="#{UserManagedBean.email}"
+                                 required="true"
+                                 requiredMessage="The email field cannot be empty!"
+                                 size="30" />
+                    <h:selectOneMenu value="#{UserManagedBean.type}">
+                            <f:selectItem itemValue="Mechanic" itemLabel="Mechanic" />
+                            <f:selectItem itemValue="User" itemLabel="User" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <p></p>
+                <h:commandButton id="submit" value="Submit" action="#{UserManagedBean.addUser}" />
+            </h:form>
+        </h3>
+    </h:body>
+</html>
+
